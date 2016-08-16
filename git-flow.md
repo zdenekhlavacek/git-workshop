@@ -4,7 +4,7 @@ Je o tom, jak pracovat v týmu, kde všichni členové používají Git.
 Naučili mě to ve firmě: [Usertech](https://usertechnologies.com/).
 
 ## Proč?
-V první přednášce jsem mluvil o FTP. To nefunguje proto, že si všichni navzájem ničí změny a na jednou souboru může tedy pracovat jen jediný člověk v jednu chvíli. Plus je tady další tisíc problémů. Například ten, že se všechno v jednu chvíli smaže, pře spadne spojení, že se soubor poruší atd. atd...
+V první přednášce jsem mluvil o FTP. To nefunguje proto, že si všichni navzájem ničí změny a na jednou souboru může tedy pracovat jen jediný člověk v jednu chvíli. Plus je tady další tisíc problémů. Například ten, že se všechno v jednu chvíli smaže, spadne spojení, že se soubor poruší atd. atd...
 
 Co kdyby ale každý měl u sebe kopii celého projektu a jen synchronizoval změny, které provedli jeho kolegové se změny, které provadí sám?
 

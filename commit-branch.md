@@ -24,6 +24,26 @@
 ## K čemu to je dobrý?
 Představte si, že na projektu pracuje tisíc lidí. Co když mají všichni najednou otevřený jeden soubor? Nebo jsou všichni na jednom síťovém uložišti...?
 
+## Základní nastavení Gitu
+Po nainstalovaní gitu je potřeba provést základní nastavení. Nejdůležitější je nastavit vaše uživatelské jméno a email. Tyto údaje se budou používat při každem 
+vytvoření nového commitu.
+
+```
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
+
+Pokud bychom chtěli nastavit jiné jméno nebo email pro konkretní projekt, spustíme tyto příkazy ve složce daného projektu, bez přepínače `--global`
+
+Pokud chceme předejít adrenalinovým zážitkům s VIMem, hodí se nastavit výchozí editor na něco více user friendly:
+```
+git config --global core.editor nano
+```
+Nebo stejný příkaz na Windows pro editor Notepad++ na:
+```
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
+```
+
 ## Co je to Commit
 [![Commits](http://nvie.com/img/merge-without-ff@2x.png)](Commits)
 
@@ -75,7 +95,7 @@ Tady máte schémátko, jak vypadá commity, když jdou za sebou...
 
 **Forkneme** si **repozitář** (repozitář je složka na serveru nebo lokálně, ve které je Git inicializovaný - prostě tam, kde se daj dělat Git příkazy).
 
-https://github.com/js-evenings/git-workshop
+https://github.com/Nodonisko/git-workshop
 
 **Forknutí** znamená, že si repozitář zkopírujeme ke svému účtu na Githubu (GitLabu, Bitbucketu...), přičemž si naše kopie pamatuje svého původního bratra, ale chová se jako samostatný adresář, který bychom si sami vytvořili.
 
@@ -101,7 +121,8 @@ Pokud znova spustíme `git status` měla by se zobrazit změny `new file: notes.
 
 Tato změna bude **unstaged**. Unstaged změny jsou takové, které nejsou připravené ke commitnutí.
 
-Krom toho bude soubor `notes.md` v terminologii Gitu brán jako **untracked**. Untracked soubor je takový soubor, který ještě nikdy nebyl přidán do Gitu. Tudíž Git sice vidí, že tam takový soubor je, ale nesleduje zatím jeho změny.
+Krom toho bude soubor `notes.md` v terminologii Gitu brán jako **untracked**. Untracked soubor je takový soubor, který ještě nikdy nebyl přidán do Gitu.
+Tudíž Git sice vidí, že tam takový soubor je, ale nesleduje zatím jeho změny.
 
 V tomhle případě je změnou vytvoření nového souboru. Git dokáže jednoduše rušit unstaged změny přes příkaz `git checkout`, ale to nefunguje na přidání složek nebo souborů, ty se normálně mažou pomocí `rm`.
 ```
@@ -127,6 +148,8 @@ $ git config --global alias.s 'status'
 $ git config --get-regexp alias
 ```
 
+### Zpět ke commitu
+
 Vytvoříme znovu soubor `notes.md` a pak přes `git s` uvidíme, že soubor byl znovu objeven Gitem!
 
 Unstaged změny nejdou commitnout:
@@ -135,7 +158,8 @@ Unstaged změny nejdou commitnout:
 $ git commit -m "tohle je přidání souboru" // nic se nestane
 ```
 
-Prve je potřeba si změny, se kterýma počítáme do commitu, - to jsou ty hezké učesané, odložit do **stage** fáze před commit, prostě si je tam hezky připravujeme. Staged změny jsou ty, které budou commitnuty, jakmile napíšeme příkaz `git commit`. Přidání do stage se dělá pomocí příkazu:
+Prve je potřeba si změny, se kterýma počítáme do commitu, - to jsou ty hezké učesané, odložit do **stage** fáze před commit, prostě si je tam hezky připravujeme. 
+Staged změny jsou ty, které budou commitnuty, jakmile napíšeme příkaz `git commit`. Přidání do stage se dělá pomocí příkazu:
 
 ```
 // přidání do stage pro commit - příprava pro commit, uschování změn
@@ -175,51 +199,11 @@ $ rm notes.md
 No tak to už umíme, tak si pojďme ten soubor commitnout příkazem:
 
 ```
+// převedeme všechny soubory do stavu staged tzn. stavu kdy jsou připraveny ke commitnutí
 $ git add --all
 
-$ git commit
-```
-**GOTCHA:** defaultní editor pro úpravu commit messages a vůbec všeho textového v Gitu je VIM.
-A nikdo neví, jak do něj něco napsat nebo hůř, jak se z něj dostat, proto:
-
-Přepneme do zapisovacího módu:
-```
-i
-```
-
-Nyní napíšeme nějakou commit message - to, co jsme udělali. V našem případě asi něco jako:
-```
-přidání souboru pro poznámky notes.md
-```
-
-A pak pryč z VIMu:
-```
-<esc>:wq
-```
-Nebo:
-```
-<esc>
-shift + ZZ
-```
-
-Pokud chceme předejít adrenalinovým zážitkům s VIMem, hodí se nastavit výchozí editor na něco více user friendly:
-```
-git config --global core.editor nano
-```
-
-Jasně, nikoho nebaví se furt přepínat do VIMu. Proto existuje zkratka, kterou používám:
-```
-$ git commit -m "commit messsage"
-```
-A rovnou si na ní uděláme aliasík, ne? Co takle, kdyby `git cm "commit message"` bylo to samé?
-```
-$ git config --global alias.cm 'git commit -m'
-```
-Vyzkoušíme si:
-```
-// udělat změnu
-$ git add notes.md
-$ git cm 'moje message'
+// vytvoříme nový commit
+$ git commit -m "moje messsage"
 ```
 
 Hotovo, commit udělán, co teď? Jdeme dál commitovat!
@@ -240,7 +224,7 @@ No, smazat. Ono smazat commit je poměrně dost těžká práce. Ukážeme si.
 Nejdřív si ukážeme seznam všech commitů - příkaz **log**, které jsme doteď vytvořili - nelekejte se, jsou tam i moje původní a to je dobře.
 
 ```
-// zobrazit seznam commitů na aktuální branch
+// zobrazit seznam commitů na aktuální branchi
 $ git log
 // hezčí zobrazí seznamu
 $ git log --pretty=oneline -n 50 --graph --abbrev-commit
@@ -260,7 +244,7 @@ Nejjednoduší "smazání" je přes příkaz **reset**:
 // smazání posledního commitu (nejaktuálnějšího)
 $ git reset --hard HEAD~1 // odeber jeden nejnovější commit (na dané větvi)
 // případně
-// $ git rest --hard HEAD~2 // odeber dva nejnovější commity (na dané větvi)
+// $ git reset --hard HEAD~2 // odeber dva nejnovější commity (na dané větvi)
 ```
 **HEAD**? Řikáte si, co je to HEAD? Head je označení pro poslední commit větve nebo prostě commit, na kterém jste nastaveni. Proto mám poznamenáno:
 
@@ -270,7 +254,7 @@ Nyní se podíváme na stav commitů, jak jdou za sebou `git l`. Vidíme, že n�
 
 **GOTCHA:** Smazat něco v Gitu je těžká práce, fakt hodně těžká. Smazat commit je z toho asi nejtěžší. Git po nějaké době maže sám ty commity, které nejsou u žádné branche (vysvětlíme). Chová se jako garbage collector a prostě maže to, k čemu není přístup.
 
-Takže Vojto, ten commit je smazaný? Ne, není. Jenom jsme ho odebrali z větve, snadno ho dáme zpátky. Je spousta cest, jak to udělat.
+Takže je ten commit opravdu smazaný? Ne, není. Jenom jsme ho odebrali z větve, snadno ho dáme zpátky. Je spousta cest, jak to udělat.
 
 #### Cherry-pick
 V našem případě si můžeme krásně zkusit příkaz **cherry-pick** (cherry-pick prostě vezme odněkud commit a přidá vám ho pod ruku (na vrchol branch a posune tak ukazatel HEAD), jak kdybyste ho právě udělali ručně):
@@ -288,12 +272,16 @@ Takže umíme:
 - přidat změnu do stage pro commit
 - smazat změnu ze stage pro commmit
 - vytvořit commit
-- jít do insert modu ve VIMu
-- odejít z VIMu
 - smazat poslední commity z branche
 - cherry-picknout commit zpátky
 
 Procvičit! Celé znovu!!
+```
+$ cd ..
+$ rm -rf git-workshop
+// znova!
+```
+
 **Úkoly**: Vše kontrolovat přes `git s` nebo `git l`!!!
 - vytvořit soubor `cvicime.md`
 - přidat soubor do stage pro commit
@@ -310,11 +298,6 @@ Procvičit! Celé znovu!!
 - smazat oba dva commity najednou
 - dostat přes Git je zpátky
 
-```
-$ cd ..
-$ rm -rf git-workshop
-// znova!
-```
 
 ### Pokročilé operace
 
@@ -332,7 +315,9 @@ Teď si každej řekne "Do piči, ten soubor `ten-se-ma-jmenovat-jinak.js` se m�
 
 Jak to smáznout z commitu? Mno.
 
-Jak jsem pravil, commit je neměnitelný - (immutable), tudíž commit jako takový nejde změnit, jde pouze nahradit jiným - snad nekecám. To je nám ale celkem šumák, protože výsledek je stejný. Kolikrát to ani člověk nepozná, neboť se u commitu třeba jenom změnit `commit id`.
+Jak jsem pravil, commit je neměnitelný - (immutable), tudíž commit jako takový nejde změnit, jde pouze nahradit jiným - snad nekecám. 
+To je nám ale celkem šumák, protože výsledek je stejný. 
+Kolikrát to ani člověk nepozná, neboť se u commitu třeba jenom změnit `commit id`.
 
 Takže **amend**:
 ```
@@ -424,36 +409,40 @@ Každý Commit má jenom jednoho předka, ale nikde není psáno, že jeden comm
 Pokud vytvoříme v Gitu branch (větev) tak umožňujeme, aby jeden Commit měl více potomků a tím se nám vývoj větví.
 
 ### K čemu to je dobrý?
-Představme si, že chceme mít naše poznámky v angličtině. Do teď jsme si je psali česky. Jak to udělat, abychom to měli i v angličtině? No, pokud máme jenom jednu větev, tak jediný způsob je udělat commity, které češtinu přeloží do angličtiny, ale tím pádem ztratíme čestinu, která bude utopená někde v historii.
+Typický příklad že života je např práce na webových stránkách. Pracujete na nějaké nové funkci například na úvodní straně, v tom vám
+přijde mail že je potřeba rychle něco hotfixnout nebo upravit taktéž na domovské straně, nebo kdekoliv jinde.
 
-Nejlepší by bylo zároveň dál psát česky a zároveň překládat češtinu do angličtiny. Prostě vytvořit si anglickou větev.
+Jak to teda uděláte když nemáte GIT? Máte několik možností, můžete soubor upravit přímo na FTP serveru na produkci, nebo jsi z FTP můžete stáhnout do další
+složky původní verzi projektu, tam ji upravíte, otestujete a nahrajete zase zpátky. Pak také nesmíte zapomenout fix překopírovat do verze projektu kde máte rozpracovanou
+novou funkčnost. No prostě prostě prasárna vedle prasárny.
+
+Ale pokud máte GIT, použijete elegatní způsob pomocí větví (branch).
 
 ### Jak na branchování
 Jednoduše se dá zjistit na jaké branch jsme teď + zobrazení všech větví:
 ```
 $ git branch
-
-// rychle udělat alias
-$ git config --global alias.b branch
 ```
 A zobrazí se nám **master**.
 
 **Master** je další pojem z Gitu. Master je ustálený název pro hlavní větev vývoje, do které jsou spojeny (mergnuty) vývojové větve. Tahle větev by měla být stabilní a dokonce by se do ní přímo nemělo commitovat - k tomu se dostaneme až budeme dělat `git flow`.
 
-Pro naše účely ale nebudeme tak striktní a řekneme si, že naše hlavní vývojová větev **master** bude větev v češtině a větev **english** jí bude následovat.
+Pro naše účely ale nebudeme tak striktní a řekneme si, že naše hlavní vývojová větev **master**.
+
+Pustíme se tedy do práce a vytvoříme jsi novou větev pro novou featuru.
 
 #### Vytvoření vývojové větve
 Vytvořit **branch** - větev se dá mnoha způsoby.
 ```
 // klasicky
-$ git branch english
+$ git branch feature
 ```
-Stalo se to, že jsme z rodičovské verze `master` vytvořili novou větev, která se jmenuje `english`.
+Stalo se to, že jsme z rodičovské verze `master` vytvořili novou větev, která se jmenuje `feature`.
 
 `git checkout` se používá nejen pro smazání unstaged změn, ale taky k přepnutí branchí:
 ```
-$ git checkout english
-$ git b
+$ git checkout feature
+$ git branch
 ```
 Ukáže se nám seznam branchí a naše aktuální, na kterou jsme se přepnul přes `git checkout`.
 
@@ -461,63 +450,73 @@ Tohle je ale zdlouhavý způsob. Sám `git branch` používám jenom k zobrazen�
 ```
 // zpět na master
 $ git checkout master
-$ git b // jsme v masteru
+$ git branch // jsme v masteru
 
 // smazání větve
-$ git branch -D english
+$ git branch -D feature
 
 // vytvoření větve english a přepnutí do ní rovnou
-$ git checkout -b english
-$ git b // jsme v english větvi
+$ git checkout -b feature
+$ git branch 
+// jsme v feature větvi
 ```
 No a co teď?
 
-Když nyní commitneme, tak commit bude stále pouze na této větvi. Tak do toho, uděláme si soubor, který bude pouze pro tuhle větev.
+Když nyní commitneme, tak commit bude stále pouze na této větvi. Tak do toho, uděláme si pár změn, který budou pouze pro tuhle větev.
+Např. máme za úkol upravit menu, přidat nějaké nové odkazy a odebrat některé staré. Jakmile máme sadu změn hotovou, můžeme je commitnout. 
 ```
-$ touch english.md
-$ git add english.md
-$ git cm "add file in english on english branch"
+$ git add --all
+// nebo můžeme přidat jen složku web
+$ git add web/
+$ git cm "new menu"
 ```
-Nyní, pokud se přepneme do masteru soubor `english.md` zmizí, protože je vedený pouze na větvi `english`.
 
-A pozor, pokud si zobrazíme `git l`. Tak vidíme commit, ze kterého vychází branch `english` a pokud uděláme nyní další commit tak se stane, že tenhle commit, ze kterého vychází větev `english` bude mít dva potomky.
+Nyní, nám přichází email nebo telefonát že je nutně potřeba něco opravit. Zatím ještě nechceme naše změnit propisovat na web protože ještě nejsou schváleny a otestovány. Tak jak na to?
+
+Přepneme do masteru, pomocí `checkout` a všechny změny provedené v menu v souboru index.html zmizí, protože ty byly provedeny na větvi `feature`.
+
+A pozor, pokud si zobrazíme `git l`. Tak vidíme commit, ze kterého vychází branch `feature` a pokud bychom udělali nyní další commit tak se stane, že tenhle commit, ze kterého vychází větev `feature` bude mít dva potomky.
 
 To je v pohodě. Ale horší budou jiné věci...
 
-Nyní, pokud chceme ukázat větvení, tak se přepneme zpátky do masteru a uděláme commit:
+Nyní, pokud chceme ukázat větvení, tak se přepneme zpátky do masteru a uděláme commit s požadovaným hotfixem, v našem případě to bude např. úprava patičky:
 ```
 $ git checkout master
-$ touch czech.md
 $ git add --all
-$ git cm "added file in czech on master branch"
+$ git cm "footer email change"
 ```
 Zkusíme příkaz `git l`, pokud nemáte nastavený stejně alias, napište:
 
-```
-git log --graph --all --decorate --pretty=oneline --abbrev-commit
-```
 Voilà - už nám rostou větvičky ze stromu a bude hůř!
 
-Resetneme si bordel, co jsme udělali na obou brančích a přepneme se do `english` a přeložíme si kus `notes.md` a změnu comitneme.
-
-Teď to začne bejt hustý. Máme tedy kousek textu přeloženej a teď si představíme, že normálně píšeme poznámky dál v češtině na větvi `master`.
-
-Takže se přepneme do `masteru` zase zapíšeme několik poznámek do `notes.md` a změnu commitneme.
-
-No a co se teď stalo? My jsme aktulizovali větev `master`, ale pokud se přepneme do `english`, tak zde ta změna není vidět.
+No a co se teď stalo? My jsme aktulizovali větev `master`, ale pokud se přepneme do `feature`, tak zde ta změna není vidět.
 
 Proč?
 
 Odpověď se nachází v `git log` nebo v `git l`.
 
-Jde o to, že když jsme vytvářeli branch `english` tak ona se vytvoří z body, který byl tehdy aktuální. Commity, které nyní vytvoříme na rodiči se nepromítnou, do `english` - logicky.
+Jde o to, že když jsme vytvářeli branch `feature` tak ona se vytvoří z bodu, který byl tehdy aktuální. Commity, které nyní vytvoříme na rodiči se nepromítnou, do `feature` - logicky.
 
-Proto je třeba nějak říct větvi `english`, aby se aktualizovala a my mohli překládat dál, jak to uděláme?
+Proto je třeba nějak říct větvi `feature`, aby se aktualizovala a my mohli otestovat naše změny i s hotfixem dál, jak to uděláme?
+
+### Merge
+Merge vezme branch, kterou mergujete do aktulní branche. Pak ji "schová" do `merge commitu` a pokud se vyskytnout konflikty, tak vám poručí je vyřešit a pak změny commitnout a tím se vytvoří merge commmit.
+
+#### Merge Commit
+Je zvlášní druh commitu, který drží ukazele na commity z branche, kterou mergujete. Takže je to commit, který v sobě schovává víc commitů. Výsledek merge je stejný jako výsledek rebasu - máte spojené dvě větve v jednu - s tim rozdílem, že merge vytvoří explicitní merge commit, kde jsou vyřešené konflikty, zatímco pomocí rebasu jen měníte stávající commity tak, aby nekonfliktovali.
+
+`Merge commit` se dá snadno smazat normálně pomocí `git reset --hard`.
+
+Takže namergujeme vetěv master do naší větve `feature` pomocí příkazu:
+
+```
+$ git merge master
+```
 
 ### Rebase
 Rebase je asi nejmocnější nástroj v Gitu, co existuje. Jdou s ním dělat neskutečný věci, ale prozatím stačí, když ho použijeme na aktualizaci větve `english` tak, aby její první commit měl za předka poslední, aktuální commit na větvi `master`. Prostě jí `pře-bázujeme`.
 
-Nyní je čas si prohlédnout `git l`. A vidíme, že `english` vychází z neaktuálního commitu v `master`. Nyní zavoláme:
+Nyní je čas si prohlédnout `git l`. A vidíme, že `feature` vychází z neaktuálního commitu v `master`. Nyní zavoláme:
 ```
 $ git rebase master
 ```
@@ -528,7 +527,7 @@ no a teď:
 $ git l
 ```
 
-A strom je pryč, neboť není potřeba, vše je aktuální. Ukazatelé na předky byly posunuty, tudíž nejaktuálněší commit z celého repozitáře je poslední commit na větvi `english`.
+A strom je pryč, neboť není potřeba, vše je aktuální. Ukazatelé na předky byly posunuty, tudíž nejaktuálněší commit z celého repozitáře je poslední commit na větvi `feature`.
 
 UF!
 

@@ -28,10 +28,10 @@ toho našeho olomouckého.
 3. [Advanced Git](./advanced.md)
 
 
-Daniel Suchý
-[Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/)
-[DanielSuchy.cz](https://danielsuchy.cz)
-[suchydan@gmail.com](suchydan@gmail.com)
+## Daniel Suchý
+[Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/) <br />
+[DanielSuchy.cz](https://danielsuchy.cz) <br />
+[suchydan@gmail.com](suchydan@gmail.com) <br />
 
 ## Credits
 - [Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/)

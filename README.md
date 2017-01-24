@@ -8,38 +8,35 @@ Kromě toho se dostaneme i k těm složitějším věcem, jako je například re
 a to i těch hluboko v historii.
 
 ## O nás
-Webdev / JS evenings klub byl založený Nikitou Mironovem. Nikita začínal učit Javascript a pak na něj navázal Honza Václavík a Dan Rys s jejich
-kurzem vývojem mobilních aplikací v Ionicu.
+Olomoucký Webdev vznikl za účelem sjednotit komunitu programátorů v Olomouci, pořádat pravidelné přednášky na zajímavá témata nebo 
+jen občas zajít posedět u piva.
 
-Teď jsem na řadě já Vojta Tranta ([@iVojta](https://twitter.com/ivojta)), JS vývojář v [Avocode](https://avocode.com/).
+Velký dík patří také Nikitu Mironovi, která je zakladatelem pražského Webdev / JS evenings klub, který mě inspiroval pro založení
+toho našeho olomouckého.
 
-Po mně následuje Petr a jeho kurz o automatizaci vývoje.
+Další velký dík patří našemu sponzorovi [Reservio](https://www.reservio.com/cs/), díky kterému může být celá akce zdarma a
+bude k dispozici občerstevní ve formě kávy, piva, vody a snad i nějaké pizzy :) Děkujeme!
 
-Za to, že umím git vděčím hlavně chlapcům [@lukas_rychtecky](https://twitter.com/lukasrychtecky) a [@jankuca](https://twitter.com/jankuca)
+Tento kurz bude z budu přednášet já [Daniel Suchý](https://danielsuchy.cz/), JS vývojář v [U+](https://u.plus/).
+
+Za to, že umím GIT vděčím hlavně Vojtovi Trantovi [@iVojta](https://twitter.com/ivojta), který je také 
+původní autorem tohoto kurzu a materiálů, které budeme používat.
 
 ## Začněte:
 1. [Git, Commit a branch](./commit-branch.md)
 2. [Git Flow](./git-flow.md)
 3. [Advanced Git](./advanced.md)
 
-## Díky
-Přišlo Vás opravdu hodně a my Vám za to děkujeme.
 
-Git workshop se tedy bude opakovat :)
-
-Video bude za ~týden.
-
-Následuje kurz automatizace vývoje.
-
-Díky
-
-Vojta Tranta<br />
-[Webdev/JS Evenings](https://www.facebook.com/groups/webdevjs/?fref=ts)<br />
-[Avocode](https://avocode.com/)<br />
-[@iVojta](https://twitter.com/ivojta)<br />
-[vojta.tranta@gmail.com](vojta.tranta@gmail.com)<br />
+Daniel Suchý
+[Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/)
+[DanielSuchy.cz](https://danielsuchy.cz)
+[suchydan@gmail.com](suchydan@gmail.com)
 
 ## Credits
+- [Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/)
+- [Reservio](https://www.reservio.com/cs/)
+- [Vojta Tranta](https://twitter.com/ivojta)
+- [Daniel Suchý](https://danielsuchy.cz/)
 - [Nikita Mironov](https://www.facebook.com/why7e?fref=hovercard)
-- [Magda Tlučhořová](https://www.facebook.com/magdalena.tluchorova?fref=ts)
-- [Alza.cz](https://www.alza.cz/)
+- [Webdev/JS Evenings - PRAHA](https://www.facebook.com/groups/webdevjs/?fref=ts)<br />

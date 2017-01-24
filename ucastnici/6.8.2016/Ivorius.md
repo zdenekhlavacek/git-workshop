@@ -1,1 +1,0 @@
-Zkouším školení pøes net. Zatím dobré, jen pár chybek v nastavení git config --global

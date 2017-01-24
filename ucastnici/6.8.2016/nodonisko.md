@@ -1,1 +1,0 @@
-Nejlepší kurz ever <3 <3 <3

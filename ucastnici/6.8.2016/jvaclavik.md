@@ -1,1 +1,0 @@
-Trochu víc se mi líbil kurz o Ionicu, jak tady v Alze byl předtím, ale jinak dobrý.

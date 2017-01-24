@@ -1,1 +1,0 @@
-Tenhle kurz je špatnej.

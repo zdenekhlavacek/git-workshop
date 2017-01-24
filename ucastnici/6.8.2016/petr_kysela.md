@@ -1,3 +1,0 @@
-# GIT
-
-- nauči se *.kit

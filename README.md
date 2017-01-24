@@ -11,16 +11,16 @@ a to i těch hluboko v historii.
 Olomoucký Webdev vznikl za účelem sjednotit komunitu programátorů v Olomouci, pořádat pravidelné přednášky na zajímavá témata nebo 
 jen občas zajít posedět u piva.
 
-Velký dík patří také Nikitu Mironovi, která je zakladatelem pražského Webdev / JS evenings klub, který mě inspiroval pro založení
-toho našeho olomouckého.
-
-Další velký dík patří našemu sponzorovi [Reservio](https://www.reservio.com/cs/), díky kterému může být celá akce zdarma a
+Velký dík patří našemu sponzorovi [Reservio](https://www.reservio.com/cs/), díky kterému může být celá akce zdarma a
 bude k dispozici občerstevní ve formě kávy, piva, vody a snad i nějaké pizzy :) Děkujeme!
 
 Tento kurz bude z budu přednášet já [Daniel Suchý](https://danielsuchy.cz/), JS vývojář v [U+](https://u.plus/).
 
 Za to, že umím GIT vděčím hlavně Vojtovi Trantovi [@iVojta](https://twitter.com/ivojta), který je také 
 původní autorem tohoto kurzu a materiálů, které budeme používat.
+
+Další velký dík patří také Nikitu Mironovi, který je zakladatelem pražského Webdev / JS evenings klub a který mě inspiroval pro založení
+toho našeho olomouckého.
 
 ## Začněte:
 1. [Git, Commit a branch](./commit-branch.md)

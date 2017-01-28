@@ -95,7 +95,7 @@ Tady máte schémátko, jak vypadá commity, když jdou za sebou...
 
 **Forkneme** si **repozitář** (repozitář je složka na serveru nebo lokálně, ve které je Git inicializovaný - prostě tam, kde se daj dělat Git příkazy).
 
-https://github.com/Nodonisko/git-workshop
+https://github.com/js-evenings/git-workshop
 
 **Forknutí** znamená, že si repozitář zkopírujeme ke svému účtu na Githubu (GitLabu, Bitbucketu...), přičemž si naše kopie pamatuje svého původního bratra, ale chová se jako samostatný adresář, který bychom si sami vytvořili.
 

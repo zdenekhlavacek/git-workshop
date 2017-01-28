@@ -29,8 +29,8 @@ Po nainstalovaní gitu je potřeba provést základní nastavení. Nejdůležit�
 vytvoření nového commitu.
 
 ```
-$ git config --global user.name "John Doe"
-$ git config --global user.email johndoe@example.com
+$ git config --global user.name "Daniel Suchy"
+$ git config --global user.email suchydan@gmail.com
 ```
 
 Pokud bychom chtěli nastavit jiné jméno nebo email pro konkretní projekt, spustíme tyto příkazy ve složce daného projektu, bez přepínače `--global`
@@ -39,7 +39,7 @@ Pokud chceme předejít adrenalinovým zážitkům s VIMem, hodí se nastavit v�
 ```
 git config --global core.editor nano
 ```
-Nebo stejný příkaz na Windows pro editor Notepad++ na:
+Nebo stejný příkaz na Windows pro editor Notepad++:
 ```
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession"
 ```
@@ -202,8 +202,49 @@ No tak to už umíme, tak si pojďme ten soubor commitnout příkazem:
 // převedeme všechny soubory do stavu staged tzn. stavu kdy jsou připraveny ke commitnutí
 $ git add --all
 
-// vytvoříme nový commit
-$ git commit -m "moje messsage"
+$ git commit
+```
+**GOTCHA:** Pokud jste si defaultní editor nezměnili pomocí git.config, je pro úpravu commit messages a vůbec všeho textového v Gitu VIM.
+A nikdo neví, jak do něj něco napsat nebo hůř, jak se z něj dostat, proto:
+
+Přepneme do zapisovacího módu:
+```
+i
+```
+
+Nyní napíšeme nějakou commit message - to, co jsme udělali. V našem případě asi něco jako:
+```
+přidání souboru pro poznámky notes.md
+```
+
+A pak pryč z VIMu:
+```
+<esc>:wq
+```
+Nebo:
+```
+<esc>
+shift + ZZ
+```
+
+Pokud chceme předejít adrenalinovým zážitkům s VIMem, hodí se nastavit výchozí editor na něco více user friendly:
+```
+git config --global core.editor nano
+```
+
+Jasně, nikoho nebaví se furt přepínat do VIMu. Proto existuje zkratka, díky které nemusí lézt do žádného editoru:
+```
+$ git commit -m "commit messsage"
+```
+A rovnou si na ní uděláme aliasík, ne? Co takle, kdyby `git cm "commit message"` bylo to samé?
+```
+$ git config --global alias.cm 'git commit -m'
+```
+Vyzkoušíme si:
+```
+// udělat změnu
+$ git add notes.md
+$ git cm 'moje message'
 ```
 
 Hotovo, commit udělán, co teď? Jdeme dál commitovat!
@@ -224,12 +265,12 @@ No, smazat. Ono smazat commit je poměrně dost těžká práce. Ukážeme si.
 Nejdřív si ukážeme seznam všech commitů - příkaz **log**, které jsme doteď vytvořili - nelekejte se, jsou tam i moje původní a to je dobře.
 
 ```
-// zobrazit seznam commitů na aktuální branchi
+// zobrazit seznam commitů na aktuální branch
 $ git log
 // hezčí zobrazí seznamu
 $ git log --pretty=oneline -n 50 --graph --abbrev-commit
 // uděláme na něj alias
-$ git config --globa alias.l 'log --pretty=oneline --graph --abbrev-commit --branches --decorate -n 100'
+$ git config --global alias.l 'log --pretty=oneline --graph --abbrev-commit --branches --decorate -n 100'
 //vyzkoušíme
 $ git l
 
@@ -409,40 +450,36 @@ Každý Commit má jenom jednoho předka, ale nikde není psáno, že jeden comm
 Pokud vytvoříme v Gitu branch (větev) tak umožňujeme, aby jeden Commit měl více potomků a tím se nám vývoj větví.
 
 ### K čemu to je dobrý?
-Typický příklad že života je např práce na webových stránkách. Pracujete na nějaké nové funkci například na úvodní straně, v tom vám
-přijde mail že je potřeba rychle něco hotfixnout nebo upravit taktéž na domovské straně, nebo kdekoliv jinde.
+Představme si, že chceme mít naše poznámky v angličtině. Do teď jsme si je psali česky. Jak to udělat, abychom to měli i v angličtině? No, pokud máme jenom jednu větev, tak jediný způsob je udělat commity, které češtinu přeloží do angličtiny, ale tím pádem ztratíme čestinu, která bude utopená někde v historii.
 
-Jak to teda uděláte když nemáte GIT? Máte několik možností, můžete soubor upravit přímo na FTP serveru na produkci, nebo jsi z FTP můžete stáhnout do další
-složky původní verzi projektu, tam ji upravíte, otestujete a nahrajete zase zpátky. Pak také nesmíte zapomenout fix překopírovat do verze projektu kde máte rozpracovanou
-novou funkčnost. No prostě prostě prasárna vedle prasárny.
-
-Ale pokud máte GIT, použijete elegatní způsob pomocí větví (branch).
+Nejlepší by bylo zároveň dál psát česky a zároveň překládat češtinu do angličtiny. Prostě vytvořit si anglickou větev.
 
 ### Jak na branchování
 Jednoduše se dá zjistit na jaké branch jsme teď + zobrazení všech větví:
 ```
 $ git branch
+
+// rychle udělat alias
+$ git config --global alias.b branch
 ```
 A zobrazí se nám **master**.
 
 **Master** je další pojem z Gitu. Master je ustálený název pro hlavní větev vývoje, do které jsou spojeny (mergnuty) vývojové větve. Tahle větev by měla být stabilní a dokonce by se do ní přímo nemělo commitovat - k tomu se dostaneme až budeme dělat `git flow`.
 
-Pro naše účely ale nebudeme tak striktní a řekneme si, že naše hlavní vývojová větev **master**.
-
-Pustíme se tedy do práce a vytvoříme jsi novou větev pro novou featuru.
+Pro naše účely ale nebudeme tak striktní a řekneme si, že naše hlavní vývojová větev **master** bude větev v češtině a větev **english** jí bude následovat.
 
 #### Vytvoření vývojové větve
 Vytvořit **branch** - větev se dá mnoha způsoby.
 ```
 // klasicky
-$ git branch feature
+$ git branch english
 ```
-Stalo se to, že jsme z rodičovské verze `master` vytvořili novou větev, která se jmenuje `feature`.
+Stalo se to, že jsme z rodičovské verze `master` vytvořili novou větev, která se jmenuje `english`.
 
 `git checkout` se používá nejen pro smazání unstaged změn, ale taky k přepnutí branchí:
 ```
-$ git checkout feature
-$ git branch
+$ git checkout english
+$ git b
 ```
 Ukáže se nám seznam branchí a naše aktuální, na kterou jsme se přepnul přes `git checkout`.
 
@@ -450,54 +487,58 @@ Tohle je ale zdlouhavý způsob. Sám `git branch` používám jenom k zobrazen�
 ```
 // zpět na master
 $ git checkout master
-$ git branch // jsme v masteru
+$ git b // jsme v masteru
 
 // smazání větve
-$ git branch -D feature
+$ git branch -D english
 
 // vytvoření větve english a přepnutí do ní rovnou
-$ git checkout -b feature
-$ git branch 
-// jsme v feature větvi
+$ git checkout -b english
+$ git b // jsme v english větvi
 ```
 No a co teď?
 
-Když nyní commitneme, tak commit bude stále pouze na této větvi. Tak do toho, uděláme si pár změn, který budou pouze pro tuhle větev.
-Např. máme za úkol upravit menu, přidat nějaké nové odkazy a odebrat některé staré. Jakmile máme sadu změn hotovou, můžeme je commitnout. 
+Když nyní commitneme, tak commit bude stále pouze na této větvi. Tak do toho, uděláme si soubor, který bude pouze pro tuhle větev.
 ```
-$ git add --all
-// nebo můžeme přidat jen složku web
-$ git add web/
-$ git cm "new menu"
+$ touch english.md
+$ git add english.md
+$ git cm "add file in english on english branch"
 ```
+Nyní, pokud se přepneme do masteru soubor `english.md` zmizí, protože je vedený pouze na větvi `english`.
 
-Nyní, nám přichází email nebo telefonát že je nutně potřeba něco opravit. Zatím ještě nechceme naše změnit propisovat na web protože ještě nejsou schváleny a otestovány. Tak jak na to?
-
-Přepneme do masteru, pomocí `checkout` a všechny změny provedené v menu v souboru index.html zmizí, protože ty byly provedeny na větvi `feature`.
-
-A pozor, pokud si zobrazíme `git l`. Tak vidíme commit, ze kterého vychází branch `feature` a pokud bychom udělali nyní další commit tak se stane, že tenhle commit, ze kterého vychází větev `feature` bude mít dva potomky.
+A pozor, pokud si zobrazíme `git l`. Tak vidíme commit, ze kterého vychází branch `english` a pokud uděláme nyní další commit tak se stane, že tenhle commit, ze kterého vychází větev `english` bude mít dva potomky.
 
 To je v pohodě. Ale horší budou jiné věci...
 
-Nyní, pokud chceme ukázat větvení, tak se přepneme zpátky do masteru a uděláme commit s požadovaným hotfixem, v našem případě to bude např. úprava patičky:
+Nyní, pokud chceme ukázat větvení, tak se přepneme zpátky do masteru a uděláme commit:
 ```
 $ git checkout master
+$ touch czech.md
 $ git add --all
-$ git cm "footer email change"
+$ git cm "added file in czech on master branch"
 ```
 Zkusíme příkaz `git l`, pokud nemáte nastavený stejně alias, napište:
 
+```
+git log --graph --all --decorate --pretty=oneline --abbrev-commit
+```
 Voilà - už nám rostou větvičky ze stromu a bude hůř!
 
-No a co se teď stalo? My jsme aktulizovali větev `master`, ale pokud se přepneme do `feature`, tak zde ta změna není vidět.
+Resetneme si bordel, co jsme udělali na obou brančích a přepneme se do `english` a přeložíme si kus `notes.md` a změnu comitneme.
+
+Teď to začne bejt hustý. Máme tedy kousek textu přeloženej a teď si představíme, že normálně píšeme poznámky dál v češtině na větvi `master`.
+
+Takže se přepneme do `masteru` zase zapíšeme několik poznámek do `notes.md` a změnu commitneme.
+
+No a co se teď stalo? My jsme aktulizovali větev `master`, ale pokud se přepneme do `english`, tak zde ta změna není vidět.
 
 Proč?
 
 Odpověď se nachází v `git log` nebo v `git l`.
 
-Jde o to, že když jsme vytvářeli branch `feature` tak ona se vytvoří z bodu, který byl tehdy aktuální. Commity, které nyní vytvoříme na rodiči se nepromítnou, do `feature` - logicky.
+Jde o to, že když jsme vytvářeli branch `english` tak ona se vytvoří z body, který byl tehdy aktuální. Commity, které nyní vytvoříme na rodiči se nepromítnou, do `english` - logicky.
 
-Proto je třeba nějak říct větvi `feature`, aby se aktualizovala a my mohli otestovat naše změny i s hotfixem dál, jak to uděláme?
+Proto je třeba nějak říct větvi `english`, aby se aktualizovala a my mohli překládat dál, jak to uděláme?
 
 ### Merge
 Merge vezme branch, kterou mergujete do aktulní branche. Pak ji "schová" do `merge commitu` a pokud se vyskytnout konflikty, tak vám poručí je vyřešit a pak změny commitnout a tím se vytvoří merge commmit.
@@ -507,7 +548,7 @@ Je zvlášní druh commitu, který drží ukazele na commity z branche, kterou m
 
 `Merge commit` se dá snadno smazat normálně pomocí `git reset --hard`.
 
-Takže namergujeme vetěv master do naší větve `feature` pomocí příkazu:
+Takže namergujeme vetěv master do naší větve `english` pomocí příkazu:
 
 ```
 $ git merge master
@@ -516,7 +557,7 @@ $ git merge master
 ### Rebase
 Rebase je asi nejmocnější nástroj v Gitu, co existuje. Jdou s ním dělat neskutečný věci, ale prozatím stačí, když ho použijeme na aktualizaci větve `english` tak, aby její první commit měl za předka poslední, aktuální commit na větvi `master`. Prostě jí `pře-bázujeme`.
 
-Nyní je čas si prohlédnout `git l`. A vidíme, že `feature` vychází z neaktuálního commitu v `master`. Nyní zavoláme:
+Nyní je čas si prohlédnout `git l`. A vidíme, že `english` vychází z neaktuálního commitu v `master`. Nyní zavoláme:
 ```
 $ git rebase master
 ```
@@ -527,7 +568,7 @@ no a teď:
 $ git l
 ```
 
-A strom je pryč, neboť není potřeba, vše je aktuální. Ukazatelé na předky byly posunuty, tudíž nejaktuálněší commit z celého repozitáře je poslední commit na větvi `feature`.
+A strom je pryč, neboť není potřeba, vše je aktuální. Ukazatelé na předky byly posunuty, tudíž nejaktuálněší commit z celého repozitáře je poslední commit na větvi `english`.
 
 UF!
 
@@ -547,4 +588,61 @@ Je zvlášní druh commitu, který drží ukazele na commity z branche, kterou m
 
 V Master a Dev branchích jsou vidět merge commity, aby bylo jasné, jaké branch se kdy udělala a kdo jí udělal.
 
+## Ad.1 Branching - příklad přímo ze života programátora
+
+Je super že už umíme používat branche, mergovat a rebasovat, ale jak to použijeme při programování?
+
+Typický příklad že života je např. práce na webových stránkách. Pracujete na nějaké nové funkci na úvodní straně, v tom vám
+přijde mail že je potřeba rychle něco hotfixnout nebo upravit taktéž na domovské straně, nebo kdekoliv jinde.
+
+Jak to teda uděláte když nemáte GIT? Máte několik možností, můžete soubor upravit přímo na FTP serveru na produkci, nebo jsi z FTP můžete stáhnout do další
+složky původní verzi projektu, tam ji upravíte, otestujete a nahrajete zase zpátky. Pak také nesmíte zapomenout fix překopírovat do verze projektu kde máte rozpracovanou
+novou funkčnost. No prostě prostě prasárna vedle prasárny.
+
+Ale pokud máte GIT, použijete elegatní způsob pomocí branchí.
+
+#### Vytvoření vývojové větve
+```
+// vytvoření větve feature a přepnutí do ní rovnou
+$ git checkout -b feature
+```
+
+Nyní začneme pracovat na nové fičuře, doděláme jen část a najednou nám přichází email nebo telefonát že je nutně potřeba něco opravit. Tak jednoduše commitneme to co máme:
+
+```
+$ git add --all
+$ git cm "new menu"
+```
+
+Zatím ještě nechceme naše změny propisovat na web, protože ještě nejsou dokončeny a otestovány. Tak jak na to?
+
+Přepneme do masteru, pomocí `git checkout`. Poté provede požadovanou opravu a commitneme.
+
+```
+$ git checkout master
+$ git add --all
+$ git cm "footer email change"
+```
+
+Nyní můžeme beze strachu nahrát náš master na FTP a pak se pomocí `git checkout` přepnout zpátky na naši feature větev a pokračovat v práci.
+
+Jakmile dokončíme práci, můžeme pomocí `git commit --amend` připojit práci k předchozímu commitu s nedokončenou prací abychom nevytvářeli polovičaté commity.
+
+```
+$ git checkout feature
+$ git add --all
+$ git commit --amend
+```
+
+Co když ale budeme potřebovat fix, nebo úpravu co jsme udělali na masteru otestovat i s naší novou feature? Použijeme `git rebase`:
+
+```
+$ git rebase master
+```
+
+A máme hotovo, máme vytvořenou novou feature i s posledním fixem z masteru. Pokud by něco nefungovalo jednoduše to opravíme a commitneme. Jakmile máme vše otestováno, můžeme naši feature branch mergnout do masteru:
+```
+$ git checkout master
+$ git merge feature
+```
 

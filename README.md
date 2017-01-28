@@ -27,6 +27,10 @@ toho našeho olomouckého.
 2. [Git Flow](./git-flow.md)
 3. [Advanced Git](./advanced.md)
 
+## Užitečné zdroje a odkazy
+- [Git book - opensource kniha o gitu přeložená i do češtiny](https://git-scm.com/book/cs/v2)
+- [Autocomplete GIT příkazů](https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion)
+- [Zobrazení aktuální větve, počtu změněných souborů atd. přímo na řádce](https://github.com/magicmonty/bash-git-prompt)
 
 ## Daniel Suchý
 [Webdev klub - OLOMOUC](https://www.facebook.com/groups/1874049622825379/) <br />

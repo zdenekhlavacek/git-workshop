@@ -33,6 +33,11 @@ Následuje kurz automatizace vývoje.
 
 Díky
 
+## Užitečné zdroje a odkazy
+- [Git book - opensource kniha o gitu přeložená i do češtiny](https://git-scm.com/book/cs/v2)
+- [Autocomplete GIT příkazů](https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion)
+- [Zobrazení aktuální větve, počtu změněných souborů atd. přímo na řádce](https://github.com/magicmonty/bash-git-prompt)
+
 Vojta Tranta<br />
 [Webdev/JS Evenings](https://www.facebook.com/groups/webdevjs/?fref=ts)<br />
 [Avocode](https://avocode.com/)<br />

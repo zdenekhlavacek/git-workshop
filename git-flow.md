@@ -18,9 +18,8 @@ Zajímavý je pro nás obrázek Applu. Protože takle nějak vypadá Git flow.
 
 ### Kdo je Steve Jobs?
 Ta červená tečka uprostřed je v našem případě náš společný repozitář, do kterého všichni přispíváme.
-Minulou přednášku jsme si forknuli repozitář ten špatný, a dneska si forkneme už ten správný!
 
-https://github.com/webdev-js-evenings/git-workshop
+https://github.com/Nodonisko/git-workshop
 
 A naklonujte si ho, jako v poslední přednášce! (omlouvám se za komplikace)
 
@@ -49,7 +48,7 @@ V první řadě potřebujeme nějaké **issues**. Issue nebo taky task je prost�
 A každý ho vyřešíme pull requestem.
 
 Issue zní:
-- Vytvořte soubor `ucastnici/6.8.2016/< vase username na githubu >.md`
+- Vytvořte soubor `ucastnici/31.2.2017/< vase username na githubu >.md`
 - napište tam vaší recenzi tohodle kurzu - stačí na dva řádky
 
 Prakticky ve všech aplikacích na sledování issues má každý takový úkol nějaké `ID`. Github ID používá samozřejmě taky a hojně. Snadno se přes `issue ID` páruje issue a pull request. Ukážeme si.
@@ -80,7 +79,7 @@ Tak šup šup! Vytváře commity umíme, udělejte commit, který splní to, co 
 
 Je také good practise psát do commit message issue ID a co s ní který commit dělá např:
 ```
-Add file /ucastnici/6.8.2016/jenicek.md
+Add file /ucastnici/31.2.2017/jenicek.md
 closes #4234
 ```
 
@@ -96,14 +95,17 @@ git push origin < vase branch >
 ```
 Tak `git` pošle commity, které jste udělali do vašeho forku a vytvoří tam novou branch. Do toho.
 
-A mrkneme se na internát!
+A mrkneme se na internet!
 
 #### Vytvoření pull requestu
+
+**----------------- Spatny jmena branchi??? --------------**
+
 Pokud si na Githubu klikneme na naší branch, ta se nám tam zobrazí možnost udělat pull request. Buďto klikneme sem nebo jde do záložky pull request a vytvoříme ho stejnou cestou.
 
 Pokud jsme ve forku, tak se automaticky vyplní repozitář kam chceme poslat pull request a dokonce se vybere i nějaká branch.
 
-My ale víme, že jsme vytvořili pull request z branch `dev` a tudíž chceme také poslat pull request do branch `next` v repozitáři `webdev-js-evenings/git-workshop`. To, jak budou vytvářet release a verzování hlavního repozitáře už je na jeho správcích. My prostě pošlete pull request do dev branche.
+My ale víme, že jsme vytvořili pull request z branch `feature-*` a tudíž chceme také poslat pull request do branch `dev` v repozitáři `Nodonisko/git-workshop`. To, jak budou vytvářet release a verzování hlavního repozitáře už je na jeho správcích. My prostě pošlete pull request do dev branche.
 
 Vyplní se sám titulek podle posledního commitu. A zároveň je možné a důležité spojit pull request s issue ID. Proto je rozumné do popisku napsat:
 ```
@@ -124,7 +126,7 @@ Osobně si **nedovedu** představit dělat vážně projekt, kterej by neměl ž
 
 Sobě jsem udělal komentář, abych něco změnil a aktualizoval změny, mrkneme se na to.
 
-Ke změně pull requestu stačí jenom aktualizovat branch ve svém forku - to umíme, buďto tam pushneme nové commity nebo uděláme `ammend` udělám `ammend`, aby bylo vidět, co se stane.
+Ke změně pull requestu stačí jenom aktualizovat branch ve svém forku - to umíme, buďto tam pushneme nové commity nebo uděláme `ammend`, aby bylo vidět, co se stane.
 
 **A všichni se mnou!!**
 
@@ -140,10 +142,10 @@ Není :-D
 #### Je krásné být aktuální
 Tohle byla pohoda... Jak ale synchronizovat ty změny?
 
-Tak, když jsem přijmul a mergnul všechny pull requesty, tak se automaticky mergnuly do větve `dev` v repozitáři `webdev-js-evenings/git-workshop`.
+Tak, když jsem přijmul a mergnul všechny pull requesty, tak se automaticky mergnuly do větve `dev` v repozitáři `Nodonisko/git-workshop`.
 Nyní, pokud zadám nový úkol, například - podepište si svojí recenzi, tak pořád platí, že všehny pull requesty musíme vytváře z aktuální branche `dev`. Jak jí ale aktualizujeme?
 
-No, musíme si přidat `webdev-js-evenings/git-workshop` jako **remote** repozitář a z něho si změny stahovat.
+No, musíme si přidat `Nodonisko/git-workshop` jako **remote** repozitář a z něho si změny stahovat.
 
 ##### Přidání remote
 Přidání remote je jednoduché a nejdřív si je hezky zobrazíme:
@@ -153,7 +155,7 @@ git remote -v
 A vidíme jen origin, paráda. Teď zkusíme přidat.
 
 ```
-git remote add origin https://github.com/webdev-js-evenings/git-workshop.git
+git remote add origin https://github.com/Nodonisko/git-workshop.git
 ```
 Uh, to nejde, co? No to je proto, že jsem pojmenoval tenhle repozitář jako `origin` a nejde mít dva repozitáře pojmenované stejně.
 
@@ -176,7 +178,7 @@ Jdeme aktualizovat
 ##### Actually buďme aktuální
 Zatím to je snad všechno nějak jasný, asi ne, nevadí, cvik je cvik.
 
-Teď si teda chceme konečně udělat naší `dev` větev aktuální tak, aby byla ve stejném stavu jako `dev` větev v `webdev-js-evenings/git-workshop`. Je to proto, abychom měli pořád aktuální změny a neměli v tom bordel a abychom mohli vyvíjet dál nad prací našich kolegů.
+Teď si teda chceme konečně udělat naší `dev` větev aktuální tak, aby byla ve stejném stavu jako `dev` větev v `Nodonisko/git-workshop`. Je to proto, abychom měli pořád aktuální změny a neměli v tom bordel a abychom mohli vyvíjet dál nad prací našich kolegů.
 
 Jak jí na to příkaz? Je jich více...
 
@@ -227,6 +229,7 @@ Pokud ale pořád chceme používat normálně lokální branch `dev` a nechceme
 git checkout dev
 git rebase origin/dev
 ```
+
 Můžete si to vyzkoušet tak, že si resetnete commity z branche `dev`.
 A je to!
 
@@ -242,7 +245,7 @@ No a co teda vy? Máte vytvořenou feature branch z commitu, kde ještě soubory
 
 Tak první krok je jasný, budete muset svojí větev `dev` aktualizovat a pak svojí feature branch rebasnou na aktuální `dev`, to vám ale nepůjde, protože zde bude konflit...
 
-**Úkol:** Všichni prosím udělejte pull request s commmitem, ve kterém do souboru `git-flow/good-music.md` napíšete odkaz na nějakou hezkou písničky - pro inspiraci tam už nějaké kvalitní songy jsou.
+**Úkol:** Všichni prosím udělejte pull request s commmitem, ve kterém do souboru `git-flow/good-music-ol.md` napíšete odkaz na nějakou hezkou písničky - pro inspiraci tam už nějaké kvalitní songy jsou.
 
 Jakmile budete mít pull request, tak já commitem smažu a přesunu tento soubor jinam a uvidíme, co se bude dít.
 
@@ -348,6 +351,6 @@ git push -f < nas remote > < feature branch >
 **POZOR:** Force pushování mění historii na remotu, můžete si tak něco smazat! Nebo tak něco smazat kolegům!
 
 ## Už to všichni umíme
-Proto dávám všem úkol. Každý najděte v mých dokumentech nějakou chybu - pravopisnou, překlep atd. Napište issue na github, udělejte vyvoněný pull request a já to mergnu a pak vydáme verzi `0.2`!!
+Proto dávám všem úkol. Každý najděte v mých dokumentech nějakou chybu - pravopisnou, překlep atd. Napište issue na github, udělejte vyvoněný pull request a já to mergnu a pak vydáme verzi `0.3`!!
 
 

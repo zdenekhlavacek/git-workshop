@@ -10,6 +10,9 @@ Takže pokud bychom chtěli v historii například smazat commit, který vytvá�
 
 Nicméně to je možné a existují minimálně dvě cesty, jak to udělat.
 
+## Novej odstavec
+Ahoj svete ted uz je to dopsany
+
 ### Vytvoření nové branche z upraveného commitu
 Krom toho, že se přes `git checkout` můžeme přepnout do jiné branche, tak se také můžeme prostě přepnout na commit.
 ```

@@ -31,6 +31,8 @@ To nám umožňuje následující postup:
 
 Tohle je trošku pracná metoda, ale je v rámci toho, co už umíme, druhá metoda je trošku víc fancy.
 
+Ahoj svete
+
 ### Iteraktivní rebase
 Rebase je mocná věc, ale jeho interaktivní podoba je ještě mocnější.
 
